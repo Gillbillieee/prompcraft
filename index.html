@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptCraft — AI Image Prompt Generator | Midjourney & DALL-E Prompts</title>
+  <meta name="description" content="Generate stunning AI image prompts for Midjourney, DALL-E, and Stable Diffusion. Free prompt generator with style presets and parameter optimization.">
+  <link rel="stylesheet" href="/src/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-8410225250422623" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo"><span class="logo-icon">🎨</span> PromptCraft</a>
+      <div class="nav-links">
+        <a href="#generator" class="nav-link">Generator</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#generator" class="btn btn-sm btn-outline">Generate Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Create Stunning AI Art With <span class="gradient-text">Perfect Prompts</span></h1>
+      <p class="hero-subtitle">Generate optimized prompts for Midjourney, DALL-E, and Stable Diffusion. No more guessing — get professional results every time.</p>
+    </div>
+  </section>
+
+  <section id="generator" class="gen-section">
+    <div class="container">
+      <div class="gen-card">
+        <div class="gen-header">
+          <h2>🎨 Prompt Generator</h2>
+          <p class="app-hint">Free — no signup required</p>
+        </div>
+        <div class="gen-body">
+          <div class="input-panel">
+            <div class="form-group">
+              <label for="subject">What do you want to create?</label>
+              <textarea id="subject" rows="3" placeholder="e.g. A mystical forest with glowing mushrooms at twilight"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="platform">AI Platform</label>
+                <select id="platform">
+                  <option value="midjourney">Midjourney</option>
+                  <option value="dalle">DALL-E 3</option>
+                  <option value="stable">Stable Diffusion</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="style">Art Style</label>
+                <select id="style">
+                  <option value="photorealistic">Photorealistic</option>
+                  <option value="digital-art">Digital Art</option>
+                  <option value="anime">Anime</option>
+                  <option value="oil-painting">Oil Painting</option>
+                  <option value="watercolor">Watercolor</option>
+                  <option value="3d-render">3D Render</option>
+                  <option value="pixel-art">Pixel Art</option>
+                  <option value="abstract">Abstract</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mood">Mood / Atmosphere</label>
+                <select id="mood">
+                  <option value="dramatic">Dramatic</option>
+                  <option value="peaceful">Peaceful</option>
+                  <option value="mysterious">Mysterious</option>
+                  <option value="vibrant">Vibrant</option>
+                  <option value="dark">Dark / Moody</option>
+                  <option value="whimsical">Whimsical</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="lighting">Lighting</label>
+                <select id="lighting">
+                  <option value="golden-hour">Golden Hour</option>
+                  <option value="dramatic">Dramatic</option>
+                  <option value="soft">Soft / Diffused</option>
+                  <option value="neon">Neon / Cyberpunk</option>
+                  <option value="natural">Natural Light</option>
+                  <option value="studio">Studio</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="aspectRatio">Aspect Ratio</label>
+                <select id="aspectRatio">
+                  <option value="--ar 16:9">Widescreen (16:9)</option>
+                  <option value="--ar 1:1" selected>Square (1:1)</option>
+                  <option value="--ar 9:16">Portrait (9:16)</option>
+                  <option value="--ar 4:3">Standard (4:3)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="quality">Quality</label>
+                <select id="quality">
+                  <option value="--q 1">Standard</option>
+                  <option value="--q 2" selected>High</option>
+                  <option value="--q .5">Ultra (more steps)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="extraDetails">Extra Details (optional, comma separated)</label>
+              <input type="text" id="extraDetails" placeholder="e.g. intricate details, 8k resolution, trending on artstation">
+            </div>
+
+            <button class="btn btn-primary btn-lg" onclick="generatePrompt()">✨ Generate Prompt</button>
+          </div>
+
+          <div class="output-panel">
+            <div class="output-header">
+              <h3>Your Prompt</h3>
+              <div class="output-actions">
+                <button class="btn btn-sm btn-outline" onclick="copyPrompt()">📋 Copy</button>
+                <button class="btn btn-sm btn-outline" onclick="variatePrompt()">🔄 Variate</button>
+              </div>
+            </div>
+
+            <div id="promptOutput" class="prompt-output">
+              <div class="empty-state" id="promptEmpty">
+                <div class="empty-icon">🎨</div>
+                <p>Your AI image prompt will appear here.</p>
+                <p class="empty-hint">Enter a subject and hit generate!</p>
+              </div>
+            </div>
+
+            <div id="promptLoading" class="loading-state" style="display:none;">
+              <div class="spinner"></div>
+              <p>Generating your prompt...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <h2>Prompt Inspiration Gallery</h2>
+      <p class="gallery-subtitle">Browse popular prompts to get started</p>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <h2>Simple Pricing</h2>
+      <p class="pricing-subtitle">Start free. Upgrade when you're ready.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-badge free">Free</div>
+          <h3>Starter</h3>
+          <div class="price">$0<span>/forever</span></div>
+          <ul class="feature-list">
+            <li>✅ Unlimited prompt generation</li>
+            <li>✅ 8 art styles</li>
+            <li>✅ All AI platforms</li>
+            <li>✅ Copy to clipboard</li>
+            <li>❌ Prompt history</li>
+            <li>❌ Custom presets</li>
+          </ul>
+          <button class="btn btn-outline btn-lg" onclick="document.getElementById('subject').focus()">Generate Free</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge pro">PRO</div>
+          <h3>Pro</h3>
+          <div class="price">$9<span>/month</span></div>
+          <ul class="feature-list">
+            <li>✅ Everything in Free</li>
+            <li>✅ 50+ premium styles</li>
+            <li>✅ Prompt history & favorites</li>
+            <li>✅ Custom presets</li>
+            <li>✅ Batch generation</li>
+            <li>✅ Priority support</li>
+          </ul>
+          <button class="btn btn-primary btn-lg">Upgrade to Pro</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><span class="logo-icon">🎨</span> PromptCraft</div>
+      <p>Built for creators who want stunning AI art.</p>
+      <p class="footer-note">&copy; 2026 PromptCraft. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/src/js/app.js"></script>
+</body>
+</html>
